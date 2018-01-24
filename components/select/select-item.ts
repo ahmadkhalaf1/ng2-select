@@ -1,18 +1,19 @@
 export class SelectItem {
   public id:string;
   public text:string;
+  public valid:string;
   public children:Array<SelectItem>;
   public parent:SelectItem;
 
   constructor(source:any) {
     if (typeof source === 'string') {
-      this.id = this.text = source;
+      this.id = this.text = this.valid = source;
     }
 
     if (typeof source === 'object') {
       this.id = source.id || source.text;
       this.text = source.text;
-
+      this.valid = source.valid;
       if (source.children && source.text) {
         this.children = source.children.map((c:any) => {
           let r:SelectItem = new SelectItem(c);
@@ -41,6 +42,7 @@ export class SelectItem {
     let r:SelectItem = new SelectItem(false);
     r.id = this.id;
     r.text = this.text;
+    r.valid = this.valid;
     r.parent = this.parent;
     return r;
   }

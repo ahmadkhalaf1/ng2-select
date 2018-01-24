@@ -25,6 +25,7 @@ let optionsTemplate = `
         <div *ngFor="#o of options"
              class="ui-select-choices-row"
              [class.active]="isActive(o)"
+             [class.disable]="isDisabled(o)"
              (mouseenter)="selectActive(o)"
              (click)="selectMatch(o, $event)">
           <a href="javascript:void(0)" class="ui-select-choices-row-inner">
@@ -435,6 +436,10 @@ export class Select {
   private isActive(value:SelectItem):boolean {
     return this.activeOption.text === value.text;
   }
+    private isDisabled(value:SelectItem):boolean {
+      
+        return value.valid != "true";
+    };
 }
 
 export class Behavior {
